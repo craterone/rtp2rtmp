@@ -28,10 +28,10 @@ gboolean init_and_run_rtp2rtmp(rtp2rtmp *r2r,const gchar *id,int audio_port,int 
 
     r2r->flvmux = gst_element_factory_make("flvmux","flvmux");
 
-    r2r->q1 = gst_element_factory_make("queue","q1");
-    r2r->q2 = gst_element_factory_make("queue","q2");
-    r2r->q3 = gst_element_factory_make("queue","q3");
-    r2r->q4 = gst_element_factory_make("queue","q4");
+    r2r->q1 = gst_element_factory_make("queue2","q1");
+    r2r->q2 = gst_element_factory_make("queue2","q2");
+    r2r->q3 = gst_element_factory_make("queue2","q3");
+    r2r->q4 = gst_element_factory_make("queue2","q4");
 
     //todo(cc): check if element create failed
 
