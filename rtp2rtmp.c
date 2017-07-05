@@ -14,26 +14,98 @@
 gboolean init_and_run_rtp2rtmp(rtp2rtmp *r2r,const gchar *id,int audio_port,int video_port,const gchar *rtmp_url){
     //todo(cc): add id to element name
     r2r->pipeline = gst_pipeline_new("rtp-rtmp-converter");
+    if(!r2r->pipeline){
+        g_printerr ("pipeline could be created.\n");
+        return -1;
+    }
+
     r2r->videoUdpsrc = gst_element_factory_make("udpsrc","video-udp-src");
+
+    if(!r2r->videoUdpsrc){
+        g_printerr ("videoUdpsrc could be created.\n");
+        return -1;
+    }
+
     r2r->rtph264depay = gst_element_factory_make("rtph264depay","h264-rtp");
+    if(!r2r->rtph264depay){
+        g_printerr ("rtph264depay could be created.\n");
+        return -1;
+    }
 
     r2r->audioUdpsrc = gst_element_factory_make("udpsrc","audio-udp-src");
+    if(!r2r->audioUdpsrc){
+        g_printerr ("audioUdpsrc could be created.\n");
+        return -1;
+    }
+
     r2r->rtpopusdepay = gst_element_factory_make("rtpopusdepay","opus-rtp");
+    if(!r2r->rtpopusdepay){
+        g_printerr ("rtpopusdepay could be created.\n");
+        return -1;
+    }
+
     r2r->opusparse = gst_element_factory_make("opusparse","opus-parse");
+    if(!r2r->opusparse){
+        g_printerr ("opusparse could be created.\n");
+        return -1;
+    }
+
     r2r->opusdec = gst_element_factory_make("opusdec","opus-dec");
+    if(!r2r->opusdec){
+        g_printerr ("opusdec could be created.\n");
+        return -1;
+    }
+
     r2r->voaacenc = gst_element_factory_make("voaacenc","vo-aacenc");
+    if(!r2r->voaacenc){
+        g_printerr ("voaacenc could be created.\n");
+        return -1;
+    }
+
     r2r->aacparse = gst_element_factory_make("aacparse","aac-parse");
+    if(!r2r->aacparse){
+        g_printerr ("aacparse could be created.\n");
+        return -1;
+    }
+
 
     r2r->rtmp = gst_element_factory_make("rtmpsink","rtmp-sink");
+    if(!r2r->rtmp){
+        g_printerr ("rtmp could be created.\n");
+        return -1;
+    }
+
 
     r2r->flvmux = gst_element_factory_make("flvmux","flvmux");
+    if(!r2r->flvmux){
+        g_printerr ("flvmux could be created.\n");
+        return -1;
+    }
+
 
     r2r->q1 = gst_element_factory_make("queue2","q1");
-    r2r->q2 = gst_element_factory_make("queue2","q2");
-    r2r->q3 = gst_element_factory_make("queue2","q3");
-    r2r->q4 = gst_element_factory_make("queue2","q4");
+    if(!r2r->q1){
+        g_printerr ("q1 could be created.\n");
+        return -1;
+    }
 
-    //todo(cc): check if element create failed
+    r2r->q2 = gst_element_factory_make("queue2","q2");
+    if(!r2r->q2){
+        g_printerr ("q2 could be created.\n");
+        return -1;
+    }
+
+    r2r->q3 = gst_element_factory_make("queue2","q3");
+    if(!r2r->q3){
+        g_printerr ("q3 could be created.\n");
+        return -1;
+    }
+
+    r2r->q4 = gst_element_factory_make("queue2","q4");
+    if(!r2r->q4){
+        g_printerr ("q4 could be created.\n");
+        return -1;
+    }
 
 
     g_object_set(G_OBJECT(r2r->audioUdpsrc),"port",audio_port,NULL);
