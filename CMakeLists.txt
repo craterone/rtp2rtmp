@@ -29,9 +29,9 @@ foreach(val RANGE ${len2})
         message(FATAL_ERROR "${package} version is ${${package}_VERSION} , but required > ${MIN_${package}_VERSION}" )
     endif()
 
-    include_directories(${${package}_STATIC_INCLUDE_DIRS})
-    link_directories(${${package}_STATIC_LIBRARY_DIRS})
-    link_libraries(${${package}_STATIC_LIBRARIES})
+    include_directories(${${package}_INCLUDE_DIRS})
+    link_directories(${${package}_LIBRARY_DIRS})
+    link_libraries(${${package}_LIBRARIES})
 
 endforeach()
 
