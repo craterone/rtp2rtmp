@@ -47,8 +47,8 @@ gboolean init_and_run_rtp2rtmp(rtp2rtmp *r2r,const gchar *id,int audio_port,int 
 
 
     gst_bin_add_many(GST_BIN(r2r->pipeline),r2r->videoUdpsrc,r2r->rtph264depay,r2r->q1,
-                     r2r->audioUdpsrc,r2r->rtpopusdepay,r2r->opusparse,r2r->opusdec, r2r->voaacenc,r2r->aacparse,r2r->q2,r2r->q3,
-                     r2r->flvmux,r2r->rtmp,r2r->q4,NULL);
+                     r2r->audioUdpsrc,r2r->rtpopusdepay,r2r->opusparse,r2r->opusdec,r2r->q4, r2r->voaacenc,r2r->aacparse,r2r->q2,r2r->q3,
+                     r2r->flvmux,r2r->rtmp,NULL);
 
     r2r->videoRTPCaps = gst_caps_from_string(VIDEO_RTP_CAPS);
 
