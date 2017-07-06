@@ -41,7 +41,7 @@ int main(int argc,char *argv[]) {
 
     rtp2rtmp *r2r = g_new0(rtp2rtmp, sizeof(rtp2rtmp));
     //init_and_run_rtp2rtmp(r2r,"abc",12345,12347,"rtmp://publish3.cdn.ucloud.com.cn/ucloud/ruaruaruarua");
-    init_and_run_rtp2rtmp(r2r,"abc",video_port,audio_port,rtmp_url);
+    init_and_run_rtp2rtmp(r2r,"abc",audio_port,video_port,rtmp_url);
 
 
     g_main_loop_run (loop);
